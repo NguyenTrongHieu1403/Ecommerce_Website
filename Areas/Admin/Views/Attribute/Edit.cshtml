@@ -1,0 +1,22 @@
+﻿@model ecommerce_final.Entities.AttributeValue
+
+<h2>Cập nhật thuộc tính</h2>
+
+<form method="post" asp-action="Edit">
+    <div class="form-group">
+        <label for="AttributeName">Tên thuộc tính (ví dụ: Size)</label>
+        <input type="text" class="form-control" id="AttributeName" name="Name" value="@Model.Name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="AttributeDescription">Mô tả thuộc tính</label>
+        <input type="text" class="form-control" id="AttributeDescription" name="Description" value="@Model.Description" required />
+    </div>
+
+    <div class="form-group">
+        <label for="AttributeValue">Giá trị thuộc tính (ví dụ: S, M, L)</label>
+        <input type="text" class="form-control" name="Value" value="@Model.Value" placeholder="Nhập giá trị" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật thuộc tính</button>
+</form>

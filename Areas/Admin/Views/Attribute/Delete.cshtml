@@ -1,0 +1,16 @@
+﻿@model ecommerce_final.Entities.AttributeValue
+
+<h2>Xác nhận xóa thuộc tính</h2>
+
+<div>
+    <h4>@Model.Name</h4>
+    <p>@Model.Description</p>
+    <p><strong>Giá trị:</strong> @Model.Value</p>
+    <p><strong>Ngày tạo:</strong> @Model.CreatedAt?.ToString("dd/MM/yyyy")</p>
+</div>
+
+<form asp-action="Delete" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?');">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Xóa" class="btn btn-danger" /> |
+    <a asp-action="Index" class="btn btn-secondary">Trở về danh sách</a>
+</form>

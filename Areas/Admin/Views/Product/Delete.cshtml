@@ -1,0 +1,60 @@
+﻿@model ecommerce_final.Entities.Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="container mt-4">
+    <!-- Product Information Section -->
+    <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+            <h4>Are you sure you want to delete this product?</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Description)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Description)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Summary)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Summary)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Price)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Quantity)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Quantity)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Img)</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.Img))
+                    {
+                        <img src="@Url.Content(Model.Img)" alt="Product Image" class="img-fluid" style="max-width: 300px; height: auto;" />
+                    }
+                    else
+                    {
+                        <span>No image available</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IsSoldOut)</dt>
+                <dd class="col-sm-9">@((Model.IsSoldOut ?? false) ? "Yes" : "No")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Confirmation Section -->
+    <div class="text-center">
+        <form asp-action="Delete" method="post" onsubmit="="return confirm('Bạn có chác chắn muốn xóa không?');"">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-secondary" asp-action="Index">Trờ về danh sách</a>
+        </form>
+    </div>
+</div>

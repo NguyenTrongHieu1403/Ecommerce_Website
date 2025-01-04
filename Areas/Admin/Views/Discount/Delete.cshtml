@@ -1,0 +1,73 @@
+﻿@model ecommerce_final.Entities.Discount
+
+@{
+    ViewData["Title"] = "Xóa mã giảm giá";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <h3 class="fw-bold mb-3">Xóa mã giảm giá</h3>
+    <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+            <a asp-action="Index" asp-area="Admin" asp-controller="Home">
+                <i class="fa-solid fa-house-user"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="fa-solid fa-angle-right"></i>
+        </li>
+        <li class="nav-item">
+            <a asp-action="Index" asp-area="Admin" asp-controller="Discount">Quản lý mã giảm giá</a>
+        </li>
+        <li class="separator">
+            <i class="fa-solid fa-angle-right"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Xóa mã giảm giá</a>
+        </li>
+    </ul>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Xóa thông tin mã giảm giá</h4>
+    </div>
+    <div class="card-body">
+        <h4>Bạn có chắc chắn muốn xóa mã giảm giá này?</h4>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DiscountPercent)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DiscountPercent)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?');">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            <a asp-action="Index" class="btn btn-secondary">Trở về danh sách</a>
+        </form>
+    </div>
+</div>

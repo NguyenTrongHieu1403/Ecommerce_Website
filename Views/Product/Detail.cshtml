@@ -1,0 +1,127 @@
+﻿@model ecommerce_final.Models.CombinedViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+<head>
+    @section HeadMeta {
+     <!-- Thẻ Open Graph cho Facebook -->
+    <meta property="og:title" content="@Model.HangHoaVM.TenHh" />
+    <meta property="og:description" content="@($"{Model.HangHoaVM.MoTa} - Giá: {Model.HangHoaVM.DonGia} USD")" />
+    <meta property="og:url" content="https://h2tshop-hag9erhtdrgtd3hy.southeastasia-01.azurewebsites.net/Product/Detail/@Model.HangHoaVM.MaHh" />
+    <meta property="og:image" content="@Model.HangHoaVM.Hinh" />
+
+    <!-- Thông tin giá sản phẩm -->
+    <meta property="og:price:amount" content="@Model.HangHoaVM.DonGia" />
+    <meta property="og:price:currency" content="USD" /> <!-- Thay "VND" bằng đơn vị tiền tệ bạn muốn -->
+  
+    }
+ <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=67764a1cd5bedc001907e76a&product=image-share-buttons&source=platform" async="async"></script>
+    </head>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="product-details">
+            <!-- Hình ảnh sản phẩm -->
+            <img src="@Url.Content(Model.HangHoaEntity.Img)"
+                 alt="@Model.HangHoaVM.TenHh"
+                 class=" product-image" style="width: 100%; height: 250px; object-fit: contain;" />
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="product-details">
+            <!-- Tên sản phẩm và các thông tin khác -->
+            <h1 class="product-title">@Model.HangHoaVM.TenHh</h1>
+
+            <div class="ratings-container">
+                <div class="ratings">
+                    <div class="ratings-val" style="width: 80%;"></div>
+                </div>
+                <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+            </div>
+
+            <div class="product-price">
+                $@Model.HangHoaVM.DonGia.ToString("N2")
+            </div>
+
+            <div class="product-content">
+                <p>@Model.HangHoaEntity.Description</p>
+            </div>
+
+            <!-- Nút thêm vào giỏ hàng -->
+            <div class="product-details-action">
+                <form asp-action="AddToCart"
+                      asp-controller="Cart"
+                      asp-route-id="@Model.HangHoaVM.MaHh">
+                    Số lượng mua:
+                    <input type="number" name="qty" value="1" min="0" style="width:45px;" />
+                    <button class="btn btn-primary">Add To Cart</button>
+                </form>
+              @*   <div class="details-action-wrapper">
+                    <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Thêm vào danh sách yêu thích</span></a>
+                    <a href="#" class="btn-product btn-compare" title="Compare"><span>Thêm vào so sánh</span></a>
+                </div> *@
+            </div>
+
+            <div class="product-details-footer">
+                <div class="product-cat">
+                    <span>Danh mục:</span>
+                    <a href="#">@ViewData["TenLoai"]</a>
+                </div>
+
+             @*    <div class="social-icons social-icons-sm">
+                    <span class="social-label">Chia sẻ:</span>
+                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                </div> *@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Tăng số lượng
+        $("#increase").click(function () {
+            let quantityInput = $(".quantity");
+            let currentQuantity = parseInt(quantityInput.val());
+            quantityInput.val(currentQuantity + 1);
+        });
+
+        // Giảm số lượng
+        $("#decrease").click(function () {
+            let quantityInput = $(".quantity");
+            let currentQuantity = parseInt(quantityInput.val());
+            if (currentQuantity > 1) {
+                quantityInput.val(currentQuantity - 1);
+            }
+        });
+
+        // Thêm sự kiện click cho nút "Mua" để gửi số lượng
+        $(".hh-box-mua").click(function (e) {
+            e.preventDefault(); // Ngăn chặn hành động mặc định
+            let qty = $(".quantity").val(); // Lấy số lượng từ input
+            let id = "@Model.HangHoaVM.MaHh"; // Lấy ID sản phẩm
+
+            // Gửi yêu cầu thêm vào giỏ hàng
+            $.ajax({
+                url: '@Url.Action("AddToCart", "Cart")',
+                type: 'POST',
+                data: { id: id, qty: qty }, // Gửi số lượng đã chọn
+                success: function (response) {
+                    // Chuyển hướng đến trang giỏ hàng
+                    window.location.href = '@Url.Action("Index", "Cart")';
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.");
+                }
+            });
+        });
+    });
+</script>
+
+

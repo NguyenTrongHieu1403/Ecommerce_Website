@@ -1,0 +1,123 @@
+﻿<div class="sidebar" data-background-color="dark">
+    <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header d-flex justify-content-between align-items-center" data-background-color="dark">
+            <div class="logo-container mx-auto">
+                <a asp-action="Index" asp-area="Admin" asp-controller="Home" class="logo navbar-brand">
+                    <img src="~/adminassets/img/H2T/h2tr.png" alt="navbar brand" height="30" />
+                </a>
+            </div>
+
+            <div class="nav-toggle d-flex align-items-center">
+                <button class="btn btn-toggle toggle-sidebar">
+                    <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                    <i class="gg-menu-left"></i>
+                </button>
+            </div>
+            <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+            </button>
+        </div>
+        <!-- End Logo Header -->
+
+    </div>
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+                <li class="nav-item active">
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i>
+                        <p>Tổng Quan</p>
+                    </a>
+                </li>
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">Components</h4>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index" asp-area="Admin" asp-controller="Product">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Quản lý Sản phẩm</p>
+                    </a> 
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index" asp-area="Admin" asp-controller="Order">
+                        <i class="fas fa-th-list"></i>
+                        <p>Quản lý Đơn hàng</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index" asp-area="Admin" asp-controller="Account">
+                        <i class="fas fa-table"></i>
+                        <p>Quản lý Khách hàng</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index" asp-area="Admin" asp-controller="Discount">
+                        <i class="fas fa-table"></i>
+                        <p>Quản lý Giảm giá</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index" asp-area="Admin" asp-controller="Taxonomy">
+                        <i class="fas fa-table"></i>
+                        <p>Quản lý Danh Mục</p>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a asp-action="Index" asp-area="Admin" asp-controller="Attribute">
+                        <i class="fas fa-table"></i>
+                        <p>Quản lý Thuộc Tính</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+
+
+                  @*   <a data-bs-toggle="collapse" href="#maps">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Quản lý hệ thống</p>
+                        <span class="caret"></span>
+                    </a> *@
+                    <div class="collapse" id="maps">
+                        <ul class="nav nav-collapse">
+                          @*   <li>
+                                <a asp-action="Index" asp-area="Admin" asp-controller="Taxonom">
+                                    <span class="sub-item">Thuộc tính sản phẩm<span>
+                                </a>
+                            </li> *@
+                         @*    <li>
+                                <a asp-action="Index" asp-area="Admin" asp-controller="Taxonomy">
+                                    <span class="sub-item">Danh mục sản phẩm<span>
+                                </a>
+                            </li> *@
+                         @*    <li>
+                                <a asp-action="Index" asp-area="Admin" asp-controller="AdminNxbs">
+                                    <span class="sub-item">Giảm giá sản phẩm<span>
+                                </a>
+                            </li> *@
+                        @*     <li>
+                                <a asp-area="Admin" asp-controller="AdminAccounts" asp-action="Index">
+                                    <span class="sub-item">Đánh giá sản phẩm</span>
+                                </a>
+                            </li> *@
+                         @*    <li>
+                                <a asp-area="Admin" asp-controller="AdminRoles" asp-action="Index" >
+                                    <span class="sub-item">Quyền truy cập</span>
+                                </a>
+                            </li> *@
+                          @*   <li>
+                                <a href="maps/jsvectormap.html">
+                                    <span class="sub-item">Địa chỉ khách hàng</span>
+                                </a>
+                            </li> *@
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

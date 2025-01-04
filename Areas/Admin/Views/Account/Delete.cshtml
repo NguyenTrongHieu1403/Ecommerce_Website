@@ -1,0 +1,54 @@
+﻿@model ecommerce_final.Entities.User
+
+@{
+    ViewData["Title"] = "Delete User";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="container mt-4">
+    <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+            <h4>Are you sure you want to delete this user?</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Username)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Username)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Email)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Avatar)</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.Avatar))
+                    {
+                        <img src="@Url.Content(Model.Avatar)" alt="User Avatar" class="img-fluid" style="max-width: 100px; height: auto;" />
+                    }
+                    else
+                    {
+                        <span>No avatar available</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <form asp-action="Delete" method="post" onsubmit="return confirmDelete();">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this user?");
+        }
+    </script>
+}

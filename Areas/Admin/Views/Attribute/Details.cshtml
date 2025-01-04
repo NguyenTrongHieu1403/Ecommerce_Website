@@ -1,0 +1,38 @@
+﻿@model ecommerce_final.Entities.AttributeValue
+
+@{
+    ViewData["Title"] = "Chi tiết thuộc tính";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Chi tiết thuộc tính</h1>
+
+<div>
+    <h4>Thông tin thuộc tính</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Tên thuộc tính</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">Mô tả</dt>
+        <dd class="col-sm-10">@Model.Description</dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">Giá trị</dt>
+        <dd class="col-sm-10">@Model.Value</dd> <!-- Hiển thị giá trị của thuộc tính -->
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">Ngày tạo</dt>
+        <dd class="col-sm-10">@Model.CreatedAt?.ToString("dd/MM/yyyy")</dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">Ngày cập nhật</dt>
+        <dd class="col-sm-10">@Model.UpdatedAt?.ToString("dd/MM/yyyy")</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Sửa</a> |
+    <a asp-action="Index">Quay lại danh sách</a>
+</div>

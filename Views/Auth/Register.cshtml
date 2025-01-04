@@ -1,0 +1,78 @@
+﻿@model ecommerce_final.Models.RegisterVM
+
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+@{
+    Layout = "_Layout";  // Nếu bạn sử dụng layout cho ứng dụng
+}
+
+<main class="main">
+    <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+        <div class="container">
+            <div class="form-box">
+                <div class="form-tab">
+                    <ul class="nav nav-pills nav-fill" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="register-tab" data-toggle="tab" href="@Url.Action("Register", "KhachHang")" role="tab" aria-controls="register" aria-selected="true">Register</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
+                            <form asp-action="Register" enctype="multipart/form-data" method="post">
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-group">
+                                    <label for="Username">Your username *</label>
+                                    <input type="text" class="form-control" id="Username" name="Username" placeholder="Enter your username" required>
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Email">Your email address *</label>
+                                    <input type="email" class="form-control" id="Email" name="Email" placeholder="Enter your email" required>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="PasswordHash">Password *</label>
+                                    <input type="password" class="form-control" id="PasswordHash" name="PasswordHash" placeholder="Enter your password" required>
+                                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ConfirmPassword">Confirm Password *</label>
+                                    <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" placeholder="Re-enter your password" required>
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+                                    <label class="custom-control-label" for="register-policy-2">I agree to the <a href="#">privacy policy</a> *</label>
+                                </div>
+
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        <span>SIGN UP</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+                                </div>
+
+                                <div class="text-center mt-3">
+                                    <p>Already have an account? <a href="@Url.Action("Login", "Auth")" class="login-link">Login Here</a></p>
+                                </div>
+                            </form>
+                        </div><!-- .End .tab-pane -->
+                    </div><!-- End .tab-content -->
+                </div><!-- End .form-tab -->
+            </div><!-- End .form-box -->
+        </div><!-- End .container -->
+    </div><!-- End .login-page section-bg -->
+</main>
+

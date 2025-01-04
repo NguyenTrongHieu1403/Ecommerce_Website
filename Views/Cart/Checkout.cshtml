@@ -1,0 +1,187 @@
+﻿@model IEnumerable<ecommerce_final.Models.CartItemVM>
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">Checkout<span>Shop</span></h1>
+        </div>
+    </div>
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="checkout">
+            <div class="container">
+                <div class="checkout-discount">
+                    <form action="#" method="post">
+                        <input type="text" class="form-control" required id="checkout-discount-input">
+                        <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
+                    </form>
+                </div>
+                <form action="@Url.Action("SubmitOrder", "Checkout")" method="post">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <h2 class="checkout-title">Billing Details</h2>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>First Name *</label>
+                                    <input type="text" class="form-control"  name="FirstName">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Last Name *</label>
+                                    <input type="text" class="form-control"  name="LastName">
+                                </div>
+                            </div>
+                            <label>Company Name (Optional)</label>
+                            <input type="text" class="form-control" name="CompanyName">
+                            <label>Country *</label>
+                            <input type="text" class="form-control"  name="Country">
+                            <label>Street address *</label>
+                            <input type="text" class="form-control" placeholder="House number and Street name"  name="StreetAddress1">
+                            <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..."  name="StreetAddress2">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Town / City *</label>
+                                    <input type="text" class="form-control"  name="City">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>State / County *</label>
+                                    <input type="text" class="form-control"  name="State">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Postcode / ZIP *</label>
+                                    <input type="text" class="form-control"  name="Postcode">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Phone *</label>
+                                    <input type="tel" class="form-control"  name="Phone">
+                                </div>
+                            </div>
+                            <label>Email address *</label>
+                            <input type="email" class="form-control"  name="Email">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="checkout-create-acc" name="CreateAccount">
+                                <label class="custom-control-label" for="checkout-create-acc">Create an account?</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="checkout-diff-address" name="DiffAddress">
+                                <label class="custom-control-label" for="checkout-diff-address">Ship to a different address?</label>
+                            </div>
+                            <label>Order notes (optional)</label>
+                            <textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order" name="OrderNotes"></textarea>
+                        </div>
+                        <aside class="col-lg-3">
+                            <div class="summary">
+                                <h3 class="summary-title">Your Order</h3>
+                                <table class="table table-summary">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.TenHh</td>
+                                                <td>$@item.ThanhTien.ToString("N2")</td>
+                                            </tr>
+                                        }
+                                        <tr class="summary-subtotal">
+                                            <td>Subtotal:</td>
+                                            <td>$@ViewBag.TotalPrice.ToString("N2")</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping:</td>
+                                            <td>Free shipping</td>
+                                        </tr>
+                                        <tr class="summary-total">
+                                            <td>Total:</td>
+                                            <td>$@ViewBag.TotalPrice.ToString("N2")</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="payment-method">
+                                    <h3 class="summary-title">Payment Method</h3>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="payment-paypal" name="PaymentMethod" value="PayPal" class="custom-control-input" required checked>
+                                        <label class="custom-control-label" for="payment-paypal">PayPal</label>
+                                    </div>
+                                </div>
+                                <div id="paypal-button-container"></div>
+
+                                    <div class="custom-control custom-radio">
+                                  @*       <input type="radio" id="payment-vnpay" name="PaymentMethod" value="VNPay" class="custom-control-input" required>
+                                        <label class="custom-control-label" for="payment-vnpay">VNPay</label>
+                                    </div> *@
+                                </div>
+                               @*  <button href="@Url.Action("PaypalDemo", "Payment") type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                    <span class="btn-text">Place Order</span>
+                                    <span class="btn-hover-text">Proceed to Checkout</span>
+                                </button> *@
+                            </div>
+                        </aside>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="https://www.paypal.com/sdk/js?client-id=AbxdKYH_cZuEAYNRIR5HgRBhsJqqBf7sj7b0D3wpKqzp_l_lAyp0vILSi8bghdlfVNKXbGxvx-V72Xt6&currency=USD"></script>
+    <script>
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'silver',
+                tagline: 'false'
+            },
+            createOrder: (data, actions) => {
+                // Lấy giá trị TotalPrice từ ViewBag
+                var totalPrice = '@ViewBag.TotalPrice';
+
+                // Gửi yêu cầu tạo đơn hàng về server, kèm giá trị tổng tiền
+                return fetch("/Payment/PaypalOrder", {
+                    method: "post",
+                    body: JSON.stringify({ totalPrice: totalPrice }), // Gửi giá trị tổng tiền
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+                    return response.json();
+                }).then((order) => order.id) // Trả về ID của đơn hàng
+                    .catch(error => alert(error.message));
+            },
+            onApprove: (data, actions) => {
+                // Xác nhận và capture đơn hàng khi người dùng hoàn tất thanh toán
+                return fetch(`/Payment/PaypalCapture?orderId=${data.orderID}`, {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+                    // Chuyển hướng đến trang thông báo thanh toán thành công
+                    window.location.href = "/Payment/Success";
+                }).catch(error => alert(error.message));
+            }
+        }).render('#paypal-button-container');
+    </script>
+}
+

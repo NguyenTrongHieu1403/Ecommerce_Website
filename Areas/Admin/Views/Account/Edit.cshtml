@@ -1,0 +1,62 @@
+﻿@model UserUpdateDTO
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Sex">Giới tính</label>
+        <input asp-for="Sex" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BirthOfDate">Ngày sinh</label>
+        <input asp-for="BirthOfDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Avatar" class="control-label">Upload New Image</label>
+        <input type="file" asp-for="Avatar" name="avatarFile" class="form-control" />
+        <span asp-validation-for="Avatar" class="text-danger"></span>
+        @if (!string.IsNullOrEmpty(Model.Avatar))
+        {
+            <p>Current Image:</p>
+            <img src="@Model.Avatar" alt="Current Image" style="max-width: 200px;" />
+        }
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Active">Hoạt động</label>
+        <input type="checkbox" asp-for="Active" class="form-check-input" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RoleId">Vai trò</label>
+        <select asp-for="RoleId" class="form-control">
+            <option value="">Chọn vai trò</option>
+            <option value="1">Admin</option>
+            <option value="2">User</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FirstName">Họ</label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName">Tên</label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Telephone">Số điện thoại</label>
+        <input asp-for="Telephone" class="form-control" />
+    </div>
+
+  @*   <div class="form-group">
+        <label asp-for="IsDelete">Xóa?</label>
+        <input asp-for="IsDelete" type="checkbox" class="form-check-input" />
+    </div> *@
+
+    <button asp class="btn btn-primary">Trở về</button>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+</form>

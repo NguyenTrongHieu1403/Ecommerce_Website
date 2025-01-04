@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "PaypalDemo";
+}
+
+<h1>Paypal Demo</h1>
+
+<div id="paypal-button-container" style="max-width:1000px;"></div>
+
+@section Scripts {
+    <script src="https://www.paypal.com/sdk/js?client-id=AbxdKYH_cZuEAYNRIR5HgRBhsJqqBf7sj7b0D3wpKqzp_l_lAyp0vILSi8bghdlfVNKXbGxvx-V72Xt6&currency=USD"></script>
+    <script>
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'silver',
+                tagline: 'false'
+            },
+            createOrder: (data, actions) => {
+                // Gửi yêu cầu tạo đơn hàng về server
+                return fetch("/Payment/PaypalOrder", {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+                    return response.json();
+                }).then((order) => order.id) // Trả về ID của đơn hàng
+                    .catch(error => alert(error.message));
+            },
+            onApprove: (data, actions) => {
+                // Xác nhận và capture đơn hàng khi người dùng hoàn tất thanh toán
+                return fetch(`/Payment/PaypalCapture?orderId=${data.orderID}`, {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+                    // Chuyển hướng đến trang thông báo thanh toán thành công
+                    window.location.href = "/Payment/Success";
+                }).catch(error => alert(error.message));
+            }
+        }).render('#paypal-button-container');
+    </script>
+}

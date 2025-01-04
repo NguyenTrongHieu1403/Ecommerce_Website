@@ -1,0 +1,43 @@
+﻿@* @model Web_Ecommerce.Models.RegisterVM
+
+
+<h2>Register</h2>
+<form id="register-form" asp-controller="Products" asp-action="Index" method="post">
+    @Html.AntiForgeryToken()
+    <div class="validation-summary-errors alert alert-danger" style="display:none;"></div>
+    <div class="form-group">
+        <label for="Email">Your email address *</label>
+        <input type="email" class="form-control" id="Email" name="Email" required />
+        <span class="text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+    </div><!-- End .form-group -->
+
+    <div class="form-group">
+        <label for="MatKhau">Password *</label>
+        <input type="password" class="form-control" id="MatKhau" name="MatKhau" required />
+        <span class="text-danger" data-valmsg-for="MatKhau" data-valmsg-replace="true"></span>
+    </div><!-- End .form-group -->
+
+    <div class="form-group">
+        <label for="MatKhauNhapLai">Confirm Password *</label>
+        <input type="password" class="form-control" id="MatKhauNhapLai" name="MatKhauNhapLai" required />
+        <span class="text-danger" data-valmsg-for="MatKhauNhapLai" data-valmsg-replace="true"></span>
+    </div><!-- End .form-group -->
+
+    <div class="form-footer">
+        <button type="submit" class="btn btn-outline-primary-2">
+            <span>SIGN UP</span>
+            <i class="icon-long-arrow-right"></i>
+        </button>
+
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="register-policy" required>
+            <label class="custom-control-label" for="register-policy">I agree to the <a href="#">privacy policy</a> *</label>
+        </div><!-- End .custom-checkbox -->
+    </div><!-- End .form-footer -->
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} *@
